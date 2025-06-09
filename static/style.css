@@ -1,0 +1,72 @@
+body {
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fff8dc;
+    text-align: center;
+    margin-top: 5%;
+  }
+  
+  .container {
+    background: #ffe4e1;
+    padding: 30px;
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  input {
+    margin: 10px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #ff69b4;
+  }
+  
+  button {
+    padding: 12px 25px;
+    font-size: 20px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ff1493;
+  }
+  
+  #result {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #d2691e;
+    transition: all 0.5s ease;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .flames-container {
+    position: relative;
+    margin-top: 40px;
+    display: inline-block;
+  }
+  
+  .flames-letters {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 28px;
+  }
+  
+  .flames-letters span {
+    display: inline-block;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .flames-letters span.removed {
+    transform: scale(0);
+    opacity: 0;
+  }
+  
