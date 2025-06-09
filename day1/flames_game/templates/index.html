@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FLAMES Game 🔥</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 FLAMES Game 🔥</h1>
+    <input type="text" id="name1" placeholder="Enter Player 1 Name" />
+    <input type="text" id="name2" placeholder="Enter Player 2 Name" />
+    <button onclick="checkFlames()">Check Relationship</button>
+    <br>
+    <div class="flames-container">
+      <div class="arrow" id="arrow">⬇️</div>
+      <div class="flames-letters" id="flamesLetters"></div>
+    </div>
+
+    <div id="result" class="hidden"></div>
+  </div>
+
+  <!-- ✅ MOVE SCRIPT HERE -->
+  <script>
+    async function checkFlames() {
+      const name1 = document.getElementById("name1").value;
+      const name2 = document.getElementById("name2").value;
+
+      const res = await fetch("/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name1, name2 }),
+      });
+
+      const data = await res.json();
+      const resultDiv = document.getElementById("result");
+      resultDiv.classList.add("hidden");
+
+      const final = await animateFlames(data.deletions);
+      resultDiv.innerHTML = `💖 Relationship status: <strong>${data.result}</strong>`;
+      resultDiv.classList.remove("hidden");
+    }
+
+    async function animateFlames(deletions) {
+      let letters = ["F", "L", "A", "M", "E", "S"];
+      const flamesLetters = document.getElementById("flamesLetters");
+      const arrow = document.getElementById("arrow");
+
+      flamesLetters.innerHTML = letters.map(l => `<span>${l}</span>`).join("");
+      arrow.style.left = "0px";
+      await new Promise(r => setTimeout(r, 100));
+
+      for (let del of deletions) {
+        const spans = document.querySelectorAll("#flamesLetters span");
+        const idx = letters.indexOf(del);
+        if (idx === -1) continue;
+
+        const target = spans[idx];
+        const offset = target.offsetLeft + target.offsetWidth / 2 - 14;
+        arrow.style.left = `${offset}px`;
+
+        await new Promise(r => setTimeout(r, 700));
+        target.classList.add("removed");
+
+        letters.splice(idx, 1);
+        await new Promise(r => setTimeout(r, 500));
+        flamesLetters.innerHTML = letters.map(l => `<span>${l}</span>`).join("");
+        await new Promise(r => setTimeout(r, 300));
+      }
+
+      return letters[0];
+    }
+  </script>
+</body>
+</html>
