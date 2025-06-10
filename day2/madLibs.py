@@ -1,0 +1,10 @@
+noun = input("Enter a noun (person or animal): ")
+verb = input("Enter a verb: ")
+place = input("Enter a place: ")
+adjective = input("Enter an adjective: ")
+food = input("Enter your favorite food: ")
+sound = input("Enter a silly sound (like 'boing' or 'splat'): ")
+
+print(f"One day, a {adjective} {noun} decided to {verb} into the {place}.")
+print(f"As it landed, it yelled '{sound.upper()}!' and surprised everyone.")
+print(f"To celebrate, it ate a huge plate of {food} and danced like nobody was watching. 🕺🍽️")
